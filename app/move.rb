@@ -34,8 +34,6 @@ end
 
 def stay_alive(board, game)
   pp 'STAY ALIVE'
-  board_and_me = game[:board].merge({ you: game[:you] })
-  board = Graph::Board.new(board_and_me)
   paths = board.search(decide_best_node(board, game))
   get_move(game[:you][:head], paths[1])
 end
