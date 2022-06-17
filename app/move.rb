@@ -7,21 +7,11 @@ require_relative 'graph/board'
 
 def move(game)
   board_and_me = game[:board].merge({ you: game[:you] })
-  graph = Graph::Board.new(board_and_me)
-  paths = graph.search
+  board = Graph::Board.new(board_and_me)
+  paths = board.search
 
-  # food_unreachable unless path.presence
-  move = if paths.present?
-           pp 'Shortest Path'
-           get_move(game[:you][:head], paths[1])
-         else
-           pp 'Stay Alive'
-           stay_alive(board_and_me)
-         end
-
-  pp move
-
-  # Choose a random direction to move in
+  # # food_unreachable unless path.presence
+  move = paths.present? ? get_move(game[:you][:head], paths[1]) : stay_alive(board, game)
 
   puts "MOVE: #{move}"
 
@@ -42,7 +32,10 @@ def get_move(me, path)
   end
 end
 
-def stay_alive(_board_and_me)
-  possible_moves = %w[up down left right]
-  possible_moves.sample
+def stay_alive(board, game)
+  pp 'STAY ALIVE'
+  board_and_me = game[:board].merge({ you: game[:you] })
+  board = Graph::Board.new(board_and_me)
+  paths = board.search(decide_best_node(board, game))
+  get_move(game[:you][:head], paths[1])
 end
