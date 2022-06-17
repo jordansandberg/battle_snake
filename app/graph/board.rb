@@ -14,8 +14,8 @@ module Graph
       super(graph)
     end
 
-    def search
-      super(@start, @end)
+    def search(end_ovrd = nil)
+      super(@start, end_ovrd || @end)
     end
 
     def heuristic(_node, _start, _goal)

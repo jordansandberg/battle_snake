@@ -24,3 +24,6 @@ Lint/UnreachableLoop:
 
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
+
+Lint/ShadowedArgument:
+  Enabled: false
