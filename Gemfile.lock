@@ -7,6 +7,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     ast (2.4.2)
+    byebug (11.1.3)
     concurrent-ruby (1.1.10)
     gastar (1.0.2)
     i18n (1.10.0)
@@ -54,8 +55,10 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  byebug
   gastar
   json
+  rack
   rack-contrib
   rubocop
   sinatra
