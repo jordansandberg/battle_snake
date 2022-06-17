@@ -10,7 +10,9 @@ module Graph
     def initialize(board_json)
       graph = build_graph(board_json)
       @start = find_my_head(board_json, graph)
+
       @end = find_closest_food(@start, graph)
+      pp "!!! END ------ #{@end.x} #{@end.y}"
       super(graph)
     end
 

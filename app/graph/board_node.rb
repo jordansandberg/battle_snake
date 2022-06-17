@@ -24,7 +24,7 @@ module Graph
     end
 
     def to_s
-      @type
+      "#{@x} #{@y}"
     end
   end
 end
