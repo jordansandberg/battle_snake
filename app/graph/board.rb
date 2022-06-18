@@ -61,10 +61,24 @@ module Graph
     def destructure_json(board_json)
       dimensions = board_json.slice(:height, :width)
       food = board_json[:food]
-      snakes = board_json[:snakes].map { |snake| snake[:body].append(snake[:head]) }
+      snakes = board_json[:snakes].map { |snake| snake[:body] }.flatten
       hazards = board_json[:hazards]
 
-      [dimensions, food, (snakes + hazards).flatten.uniq]
+      if board_json[:snakes].size > 1
+        me = board_json[:you]
+        my_length = me[:body].size
+        longer_snakes = snakes.select { |snake| snake[:body].length >= my_length && snake[:head] != me[:head] }
+        longer_snake_moves = longer_snakes.map do |_long_snake|
+          [
+            { x: longer_snakes[:head][:x] + 1, y: longer_snakes[:head][:y] },
+            { x: longer_snakes[:head][:x] - 1, y: longer_snakes[:head][:y] },
+            { x: longer_snakes[:head][:x], y: longer_snakes[:head][:y] + 1 },
+            { x: longer_snakes[:head][:x], y: longer_snakes[:head][:y] - 1 }
+          ]
+        end
+      end
+
+      [dimensions, food, (snakes + hazards + [longer_snake_moves]).flatten.uniq.compact]
     end
 
     def find_my_head(board_json, graph)
