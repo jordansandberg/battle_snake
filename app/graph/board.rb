@@ -5,7 +5,7 @@ require_relative 'board_node'
 
 module Graph
   class Board < AStar
-    attr_reader :graph
+    attr_reader :graph, :start
 
     def initialize(board_json)
       graph = build_graph(board_json)

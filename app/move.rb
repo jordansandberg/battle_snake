@@ -6,19 +6,19 @@ require_relative 'graph/board'
 # Valid moves are "up", "down", "left", or "right".
 
 def move(game)
-  board_and_me = game[:board].merge({ you: game[:you] })
   unless game[:game][:ruleset][:name] == 'wrapped'
     game[:board][:height] -= 1
     game[:board][:width] -= 1
   end
-
+  board_and_me = game[:board].merge({ you: game[:you] })
   board = Graph::Board.new(board_and_me)
   paths = board.search
 
   my_xy = game[:you][:head]
-  head_node = board.graph.keys.find { |node| my_xy[:x] == node.x && my_xy[:y] == node.y }
+  head_node = board.start
 
   # # food_unreachable unless path.presence
+  1
   move = paths.present? ? get_move(my_xy, paths[1]) : get_move(my_xy, board.graph[head_node].sample)
   puts "MOVE: #{move}"
 
