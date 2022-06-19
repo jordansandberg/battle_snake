@@ -19,8 +19,8 @@ module Graph
       super(@start, @end)
     end
 
-    def heuristic(_node, _start, _goal)
-      distance(@start, @end)
+    def heuristic(node, _start, _goal)
+      distance(@start, @end) + 40 - (graph[node].size * 10)
     end
 
     private

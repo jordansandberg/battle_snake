@@ -12,7 +12,7 @@ module Graph
     COSTS = {
       food: 0,
       board: 10,
-      start: 1
+      start: 2
     }.freeze
 
     def initialize(type, x, y)
