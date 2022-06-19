@@ -15,9 +15,15 @@ def move(game)
   my_xy = game[:you][:head]
   head_node = board.start
 
-  # # food_unreachable unless path.presence
+  # food_unreachable unless path.presence
 
-  move = paths.present? ? get_move(my_xy, paths[1]) : get_move(my_xy, board.graph[head_node].sample)
+  next_node = paths.present? ? paths[1] : board.graph[head_node].sample
+
+  move = begin
+    get_move(my_xy, next_node)
+  rescue NoMethodError
+    %i['down' 'up' 'left' 'right'].sample
+  end
 
   puts "MOVE: #{move}"
 
