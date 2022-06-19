@@ -10,7 +10,8 @@ module Graph
     def initialize(board_arr, me)
       graph = build_graph(board_arr)
       @start = graph.keys.select { |node| node.x == me[:head][:x] && node.y == me[:head][:y] }.first
-      @end = find_closest_food(@start, graph)
+
+      @end = find_closest_food(@start, graph) || graph[@start].sample
       super(graph)
     end
 
