@@ -52,12 +52,14 @@ end
 
 def build_board(board, me)
   snakes = board[:snakes].map { |snakes| snakes[:body] }.flatten
+  hazards = board[:hazards]
   food = board[:food]
 
   board_arr = Array.new(board[:height]) do |x|
     Array.new(board[:width]) do |y|
       x_y = { x: x, y: y }
       next if snakes.include?(x_y)
+      next if hazards.include?(x_y)
 
       food.include?(x_y) ? :food : :board
     end
