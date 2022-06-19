@@ -18,7 +18,7 @@ def move(game)
   # food_unreachable unless path.presence
 
   next_node = paths.present? ? paths[1] : board.graph[head_node].sample
-  
+
   move = begin
     get_move(my_xy, next_node)
   rescue NoMethodError
