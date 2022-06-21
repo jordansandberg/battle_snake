@@ -20,10 +20,27 @@ module Graph
     end
 
     def heuristic(node, _start, _goal)
-      distance(@start, @end) + 40 - (graph[node].size * 10)
+      distance(@start, @end) + floodfill(@graph, @start)
     end
 
     private
+    
+    def floodfill(graph, node)
+      node_list =  graph[node]
+      new_graph = remove_node!(graph.clone, node)
+      neighbour_weights = node_list.map do |neighbour|
+        floodfill(new_graph, neighbour)
+      end.sum
+      return 4 - node_list.size + neighbour_weights
+    end
+    
+    def remove_node!(graph, node)
+      graph.delete(node)
+      graph.transform_values do |node_arr|
+         node_arr.delete(node)
+      end
+      graph
+    end
 
     def build_graph(board_arr)
       board_nodes = board_arr.each_with_index.map do |column_arr, x|
