@@ -65,7 +65,6 @@ def build_board(board, me)
     end
   end
   board_arr[me[:head][:x]][me[:head][:y]] = :start
-  board_arr[me[:body].last[:x]][me[:body].last[:y]] = :board
 
   board_arr
 end
