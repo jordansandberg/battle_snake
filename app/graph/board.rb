@@ -20,7 +20,7 @@ module Graph
     end
 
     def heuristic(node, _start, _goal)
-      floodfill(@graph, node)
+      distance(@start, @end) + 4 - @graph[node].size
     end
 
     private
