@@ -19,8 +19,8 @@ module Graph
       super(@start, @end)
     end
 
-    def heuristic(node, start, goal)
-      distance(start, goal) + floodfill(@graph, start)
+    def heuristic(node, _start, _goal)
+      floodfill(@graph, node)
     end
 
     private
